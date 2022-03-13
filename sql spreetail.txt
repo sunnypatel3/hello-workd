@@ -1,0 +1,26 @@
+--Q1
+
+select c.product_category_name, sum(s.sku_units_sold) as total_number_units_sold
+from category c
+inner join skus s on s.sku_id = c.sku_id
+group by 1
+order by 2 desc
+
+--Q2
+
+select c.product_category_name, sum(s.sku_units_sold) as total_number_units_sold
+from category c
+inner join skus s on s.sku_id = c.sku_id
+group by 1
+having sum(s.sku_units_sold) > 10000000
+order by 2 desc
+
+
+--Q3
+
+select s.sku_id, c.product_category
+from category c
+inner join skus s on s.sku_id = c.sku_id
+where s.sku_id in (select sku_id
+			from skus
+			where sku_units_sold = 300000)
